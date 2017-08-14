@@ -1,0 +1,24 @@
+{
+  "name": "react-native-panrespondertouchview",
+  "version": "0.0.6",
+  "description": "Gesture animation",
+  "main": "panResponderTouchView.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CJELLYS/react-native-panrespondertouchview.git"
+  },
+  "keywords": [
+    "animation",
+    "PanResponder",
+    "react-native"
+  ],
+  "author": "Jelly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CJELLYS/react-native-panrespondertouchview/issues"
+  },
+  "homepage": "https://github.com/CJELLYS/react-native-panrespondertouchview#readme"
+}
