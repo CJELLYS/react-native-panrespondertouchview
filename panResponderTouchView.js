@@ -131,7 +131,7 @@ export class PanResponderTouchView extends Component {
           let yNumber = this.moveLayoutEvent.layout.y
           if (this.moveLayoutEvent.layout.y <= 0) {
             yNumber = 2;
-          } else if (this.moveLayoutEvent.layout.y + CIRCLE_SIZE >= (Platform.OS == 'ios': ScreenHeight:ScreenHeight-20)){
+          } else if (this.moveLayoutEvent.layout.y + CIRCLE_SIZE >= (Platform.OS == 'ios'? ScreenHeight:ScreenHeight-20)){
             yNumber = Platform.OS == 'ios'?(ScreenHeight - CIRCLE_SIZE - 2):(ScreenHeight - CIRCLE_SIZE - 20)
           }
 
