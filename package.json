@@ -1,6 +1,6 @@
 {
   "name": "react-native-panrespondertouchview",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gesture animation",
   "main": "panResponderTouchView.js",
   "scripts": {

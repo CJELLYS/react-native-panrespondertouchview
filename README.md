@@ -59,8 +59,8 @@ onNarrowA(index){
   PanResponderTouchView.defaultProps = {
   superOnonNarrow: function superOnonNarrow() { },
   narrowTimer: 4000,
-  highlightBackColor: '#666666',
-  unHighlightBackColor: '#222222',
+  highlightBackColor: '#222222',
+  unHighlightBackColor: '#666666',
   defaultPosition: { x: 2, y: (ScreenHeight / 2.0) },
   CIRCLE_SIZE:60,
   CIRCLE_SIZEMax:296,

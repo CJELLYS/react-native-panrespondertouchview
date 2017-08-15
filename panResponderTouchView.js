@@ -181,6 +181,7 @@ export class PanResponderTouchView extends Component {
   }
 
   _unHighlight() {
+    console.log("====>diang");
     // this._circleStyles.style.backgroundColor = '#BBBBBB';
     this._circleStyles.style = {
       backgroundColor: this.props.unHighlightBackColor
@@ -304,8 +305,8 @@ export class PanResponderTouchView extends Component {
 PanResponderTouchView.defaultProps = {
   superOnonNarrow: function superOnonNarrow() { },
   narrowTimer: 4000,
-  highlightBackColor: '#666666',
-  unHighlightBackColor: '#222222',
+  highlightBackColor: '#222222',
+  unHighlightBackColor: '#666666',
   defaultPosition: { x: 2, y: (ScreenHeight / 2.0) },
   CIRCLE_SIZE:60,
   CIRCLE_SIZEMax:296,
