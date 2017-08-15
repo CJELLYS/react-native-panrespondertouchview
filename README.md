@@ -10,6 +10,8 @@ npm install react-native-panrespondertouchview --save
 ![image](https://github.com/CJELLYS/image/blob/master/downloadios.gif?raw=true)
 
 ## use
+
+```
 import {PanResponderTouchView}  from "react-native-panrespondertouchview"
 
 onNarrowA(index){
@@ -52,3 +54,16 @@ onNarrowA(index){
       </View>
     );
   }
+  
+  
+  PanResponderTouchView.defaultProps = {
+  superOnonNarrow: function superOnonNarrow() { },
+  narrowTimer: 4000,
+  highlightBackColor: '#666666',
+  unHighlightBackColor: '#222222',
+  defaultPosition: { x: 2, y: (ScreenHeight / 2.0) },
+  CIRCLE_SIZE:60,
+  CIRCLE_SIZEMax:296,
+  boundaryValue:2
+};
+  ```

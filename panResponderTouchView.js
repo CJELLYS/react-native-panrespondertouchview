@@ -20,13 +20,15 @@ import {
 
 let ScreenHeight = Number(Dimensions.get('window').height);
 let ScreenWidth = Number(Dimensions.get('window').width);
-let CIRCLE_SIZE = 60;
-let CIRCLE_SIZEMax = 296;
-let BoundaryValue = 2;
-let scaleGap = (ScreenWidth - CIRCLE_SIZE) / 2.0
+
 export class PanResponderTouchView extends Component {
   constructor(props) {
     super(props);
+    this.CIRCLE_SIZE = this.props.CIRCLE_SIZE;
+    this.CIRCLE_SIZEMax = this.props.CIRCLE_SIZEMax;
+    this.boundaryValue = this.props.boundaryValue;
+    this.scaleGap = (ScreenWidth - this.CIRCLE_SIZE) / 2.0
+
     this._circleStyles = {};
     this._panResponder = {};
     this._previousLeft = this.props.defaultPosition.x;
@@ -34,15 +36,15 @@ export class PanResponderTouchView extends Component {
     this.moveLayoutEvent = null;
     this.startMoveEvent = null;
     this.endMoveEvent = null;
-
+    
     this.startMoveGestureState = null;
     this.endMoveGestureState = null;
     this.zoomBeforeLayout = { x: 2, y: ScreenHeight / 2.0 };//点击放大前坐标x,y
     this.onScaleNumber = true;//点击缩放次数
     this.state = {
       moveAnimatedXY: new Animated.ValueXY(this.props.defaultPosition),
-      moveAnimatedW: new Animated.Value(CIRCLE_SIZE),
-      moveAnimatedH: new Animated.Value(CIRCLE_SIZE),
+      moveAnimatedW: new Animated.Value(this.CIRCLE_SIZE),
+      moveAnimatedH: new Animated.Value(this.CIRCLE_SIZE),
       opacityAnimated: new Animated.Value(0.5),
       transformScale: 0,
     }
@@ -51,7 +53,7 @@ export class PanResponderTouchView extends Component {
   componentWillMount() {
     this._circleStyles = {
       style: {
-        left: BoundaryValue,
+        left: this.boundaryValue,
         top: ScreenHeight / 2.0,
         backgroundColor: 'green',
         opacity: 0.7
@@ -98,21 +100,21 @@ export class PanResponderTouchView extends Component {
           Animated.timing(
             this.state.moveAnimatedXY,
             {
-              toValue: { x: (ScreenWidth - CIRCLE_SIZEMax) / 2.0, y: (ScreenHeight - CIRCLE_SIZEMax) / 2.0 },
+              toValue: { x: (ScreenWidth -this.CIRCLE_SIZEMax) / 2.0, y: (ScreenHeight -this.CIRCLE_SIZEMax) / 2.0 },
               duration: 200
             }
           ).start();
           Animated.timing(
             this.state.moveAnimatedW,
             {
-              toValue: CIRCLE_SIZEMax,
+              toValue: this.CIRCLE_SIZEMax,
               duration: 200
             }
           ).start();
           Animated.timing(
             this.state.moveAnimatedH,
             {
-              toValue: CIRCLE_SIZEMax,
+              toValue: this.CIRCLE_SIZEMax,
               duration: 200
             }
           ).start();
@@ -126,13 +128,11 @@ export class PanResponderTouchView extends Component {
             this.onNarrow()
           }, this.props.narrowTimer)
         } else {
-          console.log("=====>>>.", this.moveLayoutEvent.layout);
-          console.log("=====>>>ScreenHeig7ht", ScreenHeight);
           let yNumber = this.moveLayoutEvent.layout.y
           if (this.moveLayoutEvent.layout.y <= 0) {
             yNumber = 2;
-          } else if (this.moveLayoutEvent.layout.y + CIRCLE_SIZE >= (Platform.OS == 'ios'? ScreenHeight:ScreenHeight-20)){
-            yNumber = Platform.OS == 'ios'?(ScreenHeight - CIRCLE_SIZE - 2):(ScreenHeight - CIRCLE_SIZE - 20)
+          } else if (this.moveLayoutEvent.layout.y + this.CIRCLE_SIZE >= (Platform.OS == 'ios'? ScreenHeight:ScreenHeight-20)){
+            yNumber = Platform.OS == 'ios'?(ScreenHeight - this.CIRCLE_SIZE - 2):(ScreenHeight - this.CIRCLE_SIZE - 20)
           }
 
           if (this.onScaleNumber) {
@@ -140,20 +140,20 @@ export class PanResponderTouchView extends Component {
               Animated.timing(
                 this.state.moveAnimatedXY,
                 {
-                  toValue: { x: BoundaryValue, y: Number(yNumber) },
+                  toValue: { x: this.boundaryValue, y: Number(yNumber) },
                   duration: 200
                 }
               ).start();
-              this._previousLeft = BoundaryValue;
+              this._previousLeft = this.boundaryValue;
             } else {
               Animated.timing(
                 this.state.moveAnimatedXY,
                 {
-                  toValue: { x: ScreenWidth - 60 - BoundaryValue, y: Number(yNumber) },
+                  toValue: { x: ScreenWidth - 60 - this.boundaryValue, y: Number(yNumber) },
                   duration: 200
                 }
               ).start();
-              this._previousLeft = ScreenWidth - 60 - BoundaryValue;
+              this._previousLeft = ScreenWidth - 60 - this.boundaryValue;
             }
             this.zoomBeforeLayout = { x: this._previousLeft, y: (yNumber) }
           }
@@ -229,14 +229,14 @@ export class PanResponderTouchView extends Component {
     Animated.timing(
       this.state.moveAnimatedW,
       {
-        toValue: CIRCLE_SIZE,
+        toValue: this.CIRCLE_SIZE,
         duration: 200
       }
     ).start();
     Animated.timing(
       this.state.moveAnimatedH,
       {
-        toValue: CIRCLE_SIZE,
+        toValue: this.CIRCLE_SIZE,
         duration: 200
       }
     ).start();
@@ -306,7 +306,10 @@ PanResponderTouchView.defaultProps = {
   narrowTimer: 4000,
   highlightBackColor: '#666666',
   unHighlightBackColor: '#222222',
-  defaultPosition: { x: 2, y: (ScreenHeight / 2.0) }
+  defaultPosition: { x: 2, y: (ScreenHeight / 2.0) },
+  CIRCLE_SIZE:60,
+  CIRCLE_SIZEMax:296,
+  boundaryValue:2
 };
 
 const styles = StyleSheet.create({
